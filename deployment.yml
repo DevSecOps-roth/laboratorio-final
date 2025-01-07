@@ -20,3 +20,4 @@ spec:
         image: harshitsahu2311/reddit-clone-app
         ports:
         - containerPort: 3000
+        
