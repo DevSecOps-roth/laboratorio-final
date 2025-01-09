@@ -24,6 +24,7 @@ jobs:
             -Dsonar.organization="devsecops-roth"
           projectBaseDir: .
   SCA:
+    needs: SAST
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout repository'
