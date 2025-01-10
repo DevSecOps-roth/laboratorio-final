@@ -54,11 +54,27 @@ jobs:
           name: snyk-results
           path: snyk-results.json
           
-      - name: Verificar Vulnerabilidades Críticas
+#      - name: Verificar Vulnerabilidades Críticas
+#        run: |
+#          if jq '.[] | .vulnerabilities[] | select(.severity == "critical")' snyk-results.json; then
+#            echo "Vulnerabilidades críticas detectadas."
+#            exit 1
+#          else
+#            echo "Sin vulnerabilidades críticas detectadas."
+#          fi
+#      - name: Verificar Vulnerabilidades Críticas o Altas
+#        run: |
+#          if jq '.[] | .vulnerabilities[] | select(.severity == "critical" or .severity == "high")' snyk-results.json; then
+#            echo "Vulnerabilidades críticas o altas detectadas."
+#            exit 1
+#          else
+#            echo "Sin vulnerabilidades críticas o altas detectadas."
+#          fi
+      - name: Verificar Vulnerabilidades Críticas, Altas o Medias
         run: |
-          if jq '.[] | .vulnerabilities[] | select(.severity == "critical")' snyk-results.json; then
-            echo "Vulnerabilidades críticas o altas detectadas."
+          if jq '.[] | .vulnerabilities[] | select(.severity == "critical" or .severity == "high" or .severity == "medium")' snyk-results.json; then
+            echo "Vulnerabilidades críticas, altas o medias detectadas."
             exit 1
           else
-            echo "Sin vulnerabilidades críticas o altas detectadas."
+            echo "Sin vulnerabilidades críticas, altas o medias detectadas."
           fi
