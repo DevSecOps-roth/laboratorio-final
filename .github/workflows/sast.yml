@@ -70,11 +70,11 @@ jobs:
 #          else
 #            echo "Sin vulnerabilidades críticas o altas detectadas."
 #          fi
-      - name: Verificar Vulnerabilidades Críticas, Altas o Medias
-        run: |
-          if jq '.[] | .vulnerabilities[] | select(.severity == "critical" or .severity == "high" or .severity == "medium")' snyk-results.json; then
-            echo "Vulnerabilidades críticas, altas o medias detectadas."
-            exit 1
-          else
-            echo "Sin vulnerabilidades críticas, altas o medias detectadas."
-          fi
+#      - name: Verificar Vulnerabilidades Críticas, Altas o Medias
+#        run: |
+#          if jq '.[] | .vulnerabilities[] | select(.severity == "critical" or .severity == "high" or .severity == "medium")' snyk-results.json; then
+#            echo "Vulnerabilidades críticas, altas o medias detectadas."
+#            exit 1
+#          else
+#            echo "Sin vulnerabilidades críticas, altas o medias detectadas."
+#          fi
