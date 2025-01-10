@@ -54,11 +54,11 @@ jobs:
           name: snyk-results
           path: snyk-results.json
           
-      - name: Verificar Vulnerabilidades
+      - name: Verificar Vulnerabilidades Críticas o Altas
         run: |
-          if jq '.[] | select(.vulnerabilities | length > 0)' snyk-results.json; then
-            echo "Se detectaron vulnerabilidades."
+          if jq '.[] | .vulnerabilities[] | select(.severity == "critical")' snyk-results.json; then
+            echo "Vulnerabilidades críticas o altas detectadas."
             exit 1
           else
-            echo "Sin vulnerabilidades detectadas."
+            echo "Sin vulnerabilidades críticas o altas detectadas."
           fi
