@@ -54,10 +54,11 @@ jobs:
           name: snyk-results
           path: snyk-results.json
           
-      - name: Fallo por vulnerabilidades
+      - name: Verificar Vulnerabilidades
         run: |
-          if snyk test --all-projects --json | jq '.vulnerabilities | length' | grep -q '0'; then
-            echo "Sin vulnerabilidades"
+          if jq '.[] | select(.vulnerabilities | length > 0)' snyk-results.json; then
+            echo "Se detectaron vulnerabilidades."
+            exit 1
           else
-            echo "Vulnerabilidades encontradas"
+            echo "Sin vulnerabilidades detectadas."
           fi
