@@ -47,7 +47,13 @@ jobs:
       - name: Ejecuta Snyk
         run: |
           snyk test --all-projects --json > snyk-results.json || true
-
+          
+      - name: Subir resultados de Snyk
+        uses: actions/upload-artifact@v3
+        with:
+          name: snyk-results
+          path: snyk-results.json
+          
       - name: Fallo por vulnerabilidades
         run: |
           if snyk test --all-projects --json | jq '.vulnerabilities | length' | grep -q '0'; then
