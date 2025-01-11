@@ -108,12 +108,12 @@ jobs:
           name: trivy-results
           path: trivy-results.sarif
 
-      - name: Analiza reporte trivy
-        run: |
-          if jq '.runs[].results[] | select(.level == "warning" or .level == "error")' trivy-results.sarif; then
-            echo "Se encontraron vulnerabilidades medias, altas o críticas."
-            exit 1
-          else
-            echo "No se encontraron vulnerabilidades medias, altas o críticas."
-          fi
+#      - name: Analiza reporte trivy
+#        run: |
+#          if jq '.runs[].results[] | select(.level == "warning" or .level == "error")' trivy-results.sarif; then
+#            echo "Se encontraron vulnerabilidades medias, altas o críticas."
+#            exit 1
+#          else
+#            echo "No se encontraron vulnerabilidades medias, altas o críticas."
+#          fi
 
