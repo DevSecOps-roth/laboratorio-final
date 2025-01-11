@@ -102,10 +102,18 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
-          exit-code: '1'
       - name: Subir resultados de TRIVY
         uses: actions/upload-artifact@v3
         with:
           name: trivy-results
           path: trivy-results.sarif
+
+      - name: Analiza reporte trivy
+        run: |
+          if jq '.runs[].results[] | select(.level == "warning" or .level == "error")' trivy-results.sarif; then
+            echo "Se encontraron vulnerabilidades medias, altas o críticas."
+            exit 1
+          else
+            echo "No se encontraron vulnerabilidades medias, altas o críticas."
+          fi
 
