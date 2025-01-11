@@ -102,9 +102,9 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
-
-      - name: Sube resultados a Artifact
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Subir resultados de TRIVY
+        uses: actions/upload-artifact@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          name: trivy-results
+          path: trivy-results.sarif
 
