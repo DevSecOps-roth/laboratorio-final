@@ -102,6 +102,7 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
+          exit-code: '1'
       - name: Subir resultados de TRIVY
         uses: actions/upload-artifact@v3
         with:
