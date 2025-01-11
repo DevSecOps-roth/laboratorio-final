@@ -23,6 +23,27 @@ jobs:
             -Dsonar.projectKey="DevSecOps-roth_laboratorio-final"
             -Dsonar.organization="devsecops-roth"
           projectBaseDir: .
+          
+      - name: Descargar Reporte SonarCloud
+        run: |
+          curl -u ${{ secrets.SONAR_TOKEN }} "https://sonarcloud.io/api/qualitygates/project_status?projectKey=DevSecOps-roth_laboratorio-final" -o quality-gate.json
+
+      - name: Subir Quality Gate como Artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: sast-quality-gate
+          path: quality-gate.json
+          
+      - name: Analizar Quality Gate
+        run: |
+          if jq -e '.projectStatus.status == "ERROR"' quality-gate.json > /dev/null; then
+            echo "El análisis SAST encontró vulnerabilidades medias, altas o críticas."
+            exit 1
+          else
+            echo "El análisis SAST pasó el Quality Gate sin vulnerabilidades bloqueantes."
+          fi
+
+
   SCA:
     needs: SAST
     runs-on: ubuntu-latest
