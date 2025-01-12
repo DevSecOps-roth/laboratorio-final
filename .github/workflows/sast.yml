@@ -113,12 +113,16 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t my-app:latest .
+          docker build -t rothaliphusach/laboratorio-final:latest
 
+      - name: Push Docker Image
+        run: |
+          docker push rothaliphusach/laboratorio-final:latest
+        
       - name: Ejecuta scan de Trivy
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
-          image-ref: 'my-app:latest'
+          image-ref: 'rothaliphusach/laboratorio-final:latest'
           format: 'sarif'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
@@ -151,6 +155,6 @@ jobs:
 
       - name: Envío de imagen a docker desktop
         run: |
-          docker pull ${{ secrets.DOCKER_USER }}/my-app:latest
-          docker tag ${{ secrets.DOCKER_USER }}/my-app:latest
-          docker push ${{ secrets.DOCKER_USER }}/my-app:latest
+          docker pull rothaliphusach/laboratorio-final:latest
+          docker tag rothaliphusach/laboratorio-final:latest
+          docker push rothaliphusach/laboratorio-final:latest
