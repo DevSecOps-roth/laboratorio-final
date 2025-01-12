@@ -156,5 +156,5 @@ jobs:
       - name: Envío de imagen a docker desktop
         run: |
           docker pull rothaliphusach/laboratorio-final:latest
-          docker tag rothaliphusach/laboratorio-final:latest
+#          docker tag rothaliphusach/laboratorio-final:latest
           docker push rothaliphusach/laboratorio-final:latest
