@@ -159,7 +159,6 @@ jobs:
 
       - name: Obtener ID de la Imagen Docker
         id: get_image_id
-        shell: pwsh
         run: |
           $imageId = docker images -q rothaliphusach/laboratorio-final:latest
           echo "IMAGE_ID=$imageId" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
