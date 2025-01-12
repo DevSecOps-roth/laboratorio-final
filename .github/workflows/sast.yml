@@ -156,7 +156,12 @@ jobs:
       - name: Envío de imagen a docker desktop
         run: |
           docker pull rothaliphusach/laboratorio-final:latest
+
+      - name: Obtener ID de la Imagen Docker
+        run: |
+          IMAGE_ID=$(docker images -q rothaliphusach/laboratorio-final:latest)
+          echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
   
       - name: Ejecuta Docker
         run: |
-          docker run -d --name rothaliphusach/laboratorio-final:latest -p 3000:3000 rothaliphusach/laboratorio-final:latest
+          docker run -d --name laboratorio-final -p 3000:3000 $IMAGE_ID
