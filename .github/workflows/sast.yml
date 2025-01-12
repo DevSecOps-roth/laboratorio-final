@@ -159,9 +159,9 @@ jobs:
 
       - name: Obtener ID de la Imagen Docker
         run: |
-          IMAGE_ID=$(docker images -q rothaliphusach/laboratorio-final:latest)
-          echo "IMAGE_ID=${IMAGE_ID}" >> $GITHUB_ENV
+          FOR /F "delims=" %%i IN ('docker images -q rothaliphusach/laboratorio-final:latest') DO @set IMAGE_ID=%%i
+          echo "IMAGE_ID=%IMAGE_ID%" >> $GITHUB_ENV
   
       - name: Ejecuta Docker
         run: |
-          docker run -d --name laboratorio-final -p 3000:3000 $IMAGE_ID
+          docker run -d --name laboratorio-final -p 3000:3000 %IMAGE_ID%
