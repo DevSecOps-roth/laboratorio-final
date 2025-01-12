@@ -158,10 +158,13 @@ jobs:
           docker pull rothaliphusach/laboratorio-final:latest
 
       - name: Obtener ID de la Imagen Docker
+        id: get_image_id
+        shell: pwsh
         run: |
-          FOR /F "delims=" %%i IN ('docker images -q rothaliphusach/laboratorio-final:latest') DO @set IMAGE_ID=%%i
-          echo "IMAGE_ID=%IMAGE_ID%" >> $GITHUB_ENV
-  
-      - name: Ejecuta Docker
+          $imageId = docker images -q rothaliphusach/laboratorio-final:latest
+          echo "IMAGE_ID=$imageId" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
+
+      - name: Ejecutar Docker
+        shell: pwsh
         run: |
-          docker run -d --name laboratorio-final -p 3000:3000 %IMAGE_ID%
+          docker run -d --name laboratorio-final -p 3000:3000 $env:IMAGE_ID
