@@ -113,7 +113,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t rothaliphusach/laboratorio-final:latest
+          docker build -t rothaliphusach/laboratorio-final:latest .
 
       - name: Push Docker Image
         run: |
