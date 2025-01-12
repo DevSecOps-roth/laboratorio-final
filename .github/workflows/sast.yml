@@ -148,7 +148,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Login Docker
-        uses: docker/login-action@v3
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -159,4 +159,4 @@ jobs:
   
       - name: Ejecuta Docker
         run: |
-          docker run -d --name laboratorio-final -p 3000:3000 laboratorio-final/nodejs
+          docker run -d --name rothaliphusach/laboratorio-final:latest -p 3000:3000 rothaliphusach/laboratorio-final:latest
