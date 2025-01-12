@@ -164,6 +164,5 @@ jobs:
           echo "IMAGE_ID=$imageId" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
 
       - name: Ejecutar Docker
-        shell: pwsh
         run: |
           docker run -d --name laboratorio-final -p 3000:3000 $env:IMAGE_ID
